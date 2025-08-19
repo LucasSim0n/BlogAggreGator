@@ -1,28 +1,31 @@
 package config
 
 import (
-	"bufio"
 	"encoding/json"
-	"fmt"
 	"io"
 	"os"
+	"path/filepath"
 )
 
 const cfgFile = "/.gatorconfig.json"
 
-type Config struct {
+type State struct {
+	Cfg *config
+}
+
+type config struct {
 	DbURL       string `json:"db_url"`
 	CurrentUser string `json:"current_user_name"`
 }
 
-func ReadConfig() (Config, error) {
-	var cfg Config
-	home, err := os.UserHomeDir()
+func ReadConfig() (*config, error) {
+	var cfg *config
+
+	cfgPath, err := getConfigFilePath()
 	if err != nil {
 		return cfg, err
 	}
 
-	cfgPath := home + cfgFile
 	file, err := os.Open(cfgPath)
 	if err != nil {
 		return cfg, err
@@ -42,37 +45,12 @@ func ReadConfig() (Config, error) {
 	return cfg, nil
 }
 
-func (cfg *Config) SetUser() error {
-	fmt.Print("Set user ~> ")
-
-	scanner := bufio.NewScanner(os.Stdin)
-	scanner.Scan()
-	user := scanner.Text()
-
-	err := write(cfg, user)
-	if err != nil {
-		return err
-	}
-	return nil
-}
-
-func write(cfg *Config, user string) error {
-
+func getConfigFilePath() (string, error) {
 	home, err := os.UserHomeDir()
 	if err != nil {
-		return err
+		return "", err
 	}
-	cfgPath := home + cfgFile
 
-	cfg.CurrentUser = user
-
-	data, err := json.Marshal(cfg)
-	if err != nil {
-		return err
-	}
-	err = os.WriteFile(cfgPath, data, os.ModePerm)
-	if err != nil {
-		return err
-	}
-	return nil
+	fullPath := filepath.Join(home, cfgFile)
+	return fullPath, nil
 }
