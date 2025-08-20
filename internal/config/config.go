@@ -5,11 +5,14 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+
+	"github.com/LucasSim0n/BlogAggreGator/internal/database"
 )
 
 const cfgFile = "/.gatorconfig.json"
 
 type State struct {
+	DB  *database.Queries
 	Cfg *config
 }
 

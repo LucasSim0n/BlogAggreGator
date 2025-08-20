@@ -1,6 +1,7 @@
 package config
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -12,8 +13,12 @@ func LoginHandler(s *State, cmd Command) error {
 	}
 
 	user := cmd.Args[0]
+	_, err := s.DB.GetUser(context.Background(), user)
+	if err != nil {
+		return fmt.Errorf("User %s doesn't exist", user)
+	}
 
-	err := writeUser(*s.Cfg, user)
+	err = writeUser(*s.Cfg, user)
 	if err != nil {
 		return err
 	}
