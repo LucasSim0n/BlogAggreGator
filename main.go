@@ -34,6 +34,8 @@ func main() {
 	var cmds config.Commands
 	cmds.Register("login", config.LoginHandler)
 	cmds.Register("register", config.RegisterHandler)
+	cmds.Register("reset", config.ResetHandler)
+	cmds.Register("users", config.UsersHandler)
 
 	args := os.Args
 	if len(args) < 2 {
