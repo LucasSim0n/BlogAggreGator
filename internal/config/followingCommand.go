@@ -3,13 +3,11 @@ package config
 import (
 	"context"
 	"fmt"
+
+	"github.com/LucasSim0n/BlogAggreGator/internal/database"
 )
 
-func FollowingHandler(s *State, cmd Command) error {
-	user, err := s.DB.GetUser(context.Background(), s.Cfg.CurrentUser)
-	if err != nil {
-		return err
-	}
+func FollowingHandler(s *State, cmd Command, user database.User) error {
 
 	feeds, err := s.DB.GetFeedFollowsForUser(context.Background(), user.ID)
 	if err != nil {

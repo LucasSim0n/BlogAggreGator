@@ -6,6 +6,7 @@ import (
 )
 
 func FeedsHandler(s *State, cmd Command) error {
+	// TODO: Nueva query con INNER JOIN -> eliminar GetUserByID
 	feeds, err := s.DB.ListFeeds(context.Background())
 	if err != nil {
 		return err

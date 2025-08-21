@@ -9,7 +9,7 @@ import (
 	"github.com/google/uuid"
 )
 
-func FollowHandler(s *State, cmd Command) error {
+func FollowHandler(s *State, cmd Command, user database.User) error {
 
 	if len(cmd.Args) == 0 {
 		return fmt.Errorf("The follow command takes a URL as argument:\ngator follow <URL>")
@@ -17,10 +17,6 @@ func FollowHandler(s *State, cmd Command) error {
 	url := cmd.Args[0]
 
 	feed, err := s.DB.GetFeedByURL(context.Background(), url)
-	if err != nil {
-		return err
-	}
-	user, err := s.DB.GetUser(context.Background(), s.Cfg.CurrentUser)
 	if err != nil {
 		return err
 	}

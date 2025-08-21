@@ -37,10 +37,10 @@ func main() {
 	cmds.Register("reset", config.ResetHandler)
 	cmds.Register("users", config.UsersHandler)
 	cmds.Register("agg", config.AggHandler)
-	cmds.Register("addfeed", config.AddFeedHandler)
 	cmds.Register("feeds", config.FeedsHandler)
-	cmds.Register("follow", config.FollowHandler)
-	cmds.Register("following", config.FollowingHandler)
+	cmds.Register("addfeed", config.LoggedIn(config.AddFeedHandler))
+	cmds.Register("follow", config.LoggedIn(config.FollowHandler))
+	cmds.Register("following", config.LoggedIn(config.FollowingHandler))
 
 	args := os.Args
 	if len(args) < 2 {

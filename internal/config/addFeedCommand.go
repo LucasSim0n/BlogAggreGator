@@ -8,15 +8,10 @@ import (
 	"time"
 )
 
-func AddFeedHandler(s *State, cmd Command) error {
+func AddFeedHandler(s *State, cmd Command, user database.User) error {
 
 	if len(cmd.Args) < 2 {
 		return fmt.Errorf("addfeed requires 2 arguments:\ngator addfeed <name> <url>")
-	}
-
-	userData, err := s.DB.GetUser(context.Background(), s.Cfg.CurrentUser)
-	if err != nil {
-		return err
 	}
 
 	feedName := cmd.Args[0]
@@ -29,7 +24,7 @@ func AddFeedHandler(s *State, cmd Command) error {
 		UpdatedAt: time.Now(),
 		Name:      feedName,
 		Url:       feedURL,
-		UserID:    userData.ID,
+		UserID:    user.ID,
 	}
 
 	s.DB.CreateFeed(context.Background(), fd)
@@ -38,7 +33,7 @@ func AddFeedHandler(s *State, cmd Command) error {
 		ID:        uuid.New(),
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
-		UserID:    userData.ID,
+		UserID:    user.ID,
 		FeedID:    feedId,
 	}
 
