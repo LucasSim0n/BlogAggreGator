@@ -21,9 +21,10 @@ func AddFeedHandler(s *State, cmd Command) error {
 
 	feedName := cmd.Args[0]
 	feedURL := cmd.Args[1]
+	feedId := uuid.New()
 
 	fd := database.CreateFeedParams{
-		ID:        uuid.New(),
+		ID:        feedId,
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 		Name:      feedName,
@@ -32,6 +33,16 @@ func AddFeedHandler(s *State, cmd Command) error {
 	}
 
 	s.DB.CreateFeed(context.Background(), fd)
+
+	feedFollow := database.CreateFeedFollowParams{
+		ID:        uuid.New(),
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
+		UserID:    userData.ID,
+		FeedID:    feedId,
+	}
+
+	s.DB.CreateFeedFollow(context.Background(), feedFollow)
 
 	fmt.Println(fd)
 	return nil

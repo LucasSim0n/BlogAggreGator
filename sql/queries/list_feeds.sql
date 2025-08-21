@@ -1,3 +1,3 @@
 -- name: ListFeeds :many
 
-SELECT name, user_id FROM feeds;
+SELECT name, url, user_id FROM feeds;
