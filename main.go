@@ -32,6 +32,7 @@ func main() {
 	}
 
 	var cmds config.Commands
+	cmds.Register("help", config.HelpHandler)
 	cmds.Register("login", config.LoginHandler)
 	cmds.Register("register", config.RegisterHandler)
 	cmds.Register("reset", config.ResetHandler)
