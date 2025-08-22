@@ -1,4 +1,4 @@
-# BlogAggreGator
+# BlogAggre-Gator 🐊
 
 Guided project of [boot.dev](https://boot.dev) academy.
 
@@ -6,7 +6,7 @@ A straightforward RSS/blog aggregator written in Go.
 
 ## Project overview
 
-BlogAggreGator is a lightweight command-line application that fetches and aggregates blog or RSS feed posts. It uses [sqlc](https://sqlc.dev/) for type-safe SQL queries and stores results in a relational database.
+Gator is a lightweight command-line application that fetches and aggregates blog or RSS feed posts. It uses [sqlc](https://sqlc.dev/) for type-safe SQL queries and stores results in a relational database.
 
 The project is designed to be simple, extensible, and developer-friendly.
 
@@ -29,8 +29,8 @@ The project is designed to be simple, extensible, and developer-friendly.
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/LucasSim0n/BlogAggreGator.git
-   cd BlogAggreGator```
+   git clone https://github.com/LucasSim0n/gator.git
+   cd gator```
 
 2. Install dependencies:
     
