@@ -30,16 +30,19 @@ The project is designed to be simple, extensible, and developer-friendly.
 
    ```bash
    git clone https://github.com/LucasSim0n/gator.git
-   cd gator```
+   cd gator
+   ```
 
 2. Install dependencies:
     
     ```bash
     go mod download
     ```
-3. Configure your database schema and queries using sql/ and sqlc.yaml.
+3. Configure your database schema and queries using sql/ and sqlc.yaml (I used postgres and goose for the migrations) and create a .gatorconfig.json file in your home directory. It should contain your database conection string in this format:
 
-I used postgres and goose for the migrations.
+   ```json
+   {"db_url":"your_connection_string"}
+   ```
 
 4. Build the aplication:
     
@@ -51,6 +54,6 @@ I used postgres and goose for the migrations.
 
 Run the help command to see all the avaliable commands and their usage.
     
-    ```bash
+   ```bash
     gator help
-    ```
+   ```
